@@ -34,12 +34,13 @@ void Calculator::add_parcel(int weight, int volume, int origin, int destination,
 
     History_db db=History_db();
     time_t now = time(0);
-    tm *ltm = localtime(&now);
+    tm ltm;
+    localtime_s(&ltm, &now);
 
     int days = ceil(calculate_time(find_path(type, origin, destination, premium), premium));
     int price = ceil(calculate_cost(find_path(type, origin, destination, premium), premium));
 
-    db.save_data(weight, volume, Date{ltm->tm_mday, ltm->tm_mon, ltm->tm_year}, Date{(ltm->tm_mday+days)%30, (int)(ltm->tm_mon+floor(days/30)), ltm->tm_year}, price, origin, destination, premium, sender, recepient);
+    db.save_data(weight, volume, Date{ ltm.tm_mday, ltm.tm_mon, ltm.tm_year }, Date{ (ltm.tm_mday + days) % 30, (int)(ltm.tm_mon + floor(days / 30)), ltm.tm_year }, price, origin, destination, premium, sender, recepient);
     this->history.update();
 }
 
