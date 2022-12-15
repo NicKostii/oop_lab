@@ -52,10 +52,11 @@ vector <path> Map::find_fastest_path(int origin, int destination, Parameters par
     for(int i = 0; i < number_of_deps; ++i)
         graph[i] = new double[number_of_deps];
 
-    double d[number_of_deps];
+    vector <double> d(number_of_deps);
     double temp, minimun;
-    int v[number_of_deps], min_index, begin_index=origin-1;
-    Connections con_graph[number_of_deps][number_of_deps];
+    vector <int> v(number_of_deps);
+    int min_index, begin_index = origin - 1;
+    vector <vector<Connections>> con_graph(number_of_deps, vector <Connections>(number_of_deps));
 
     int counter=0;
     for(int i=0; i<number_of_deps; i++){
@@ -123,7 +124,7 @@ vector <path> Map::find_fastest_path(int origin, int destination, Parameters par
         }
     } while (min_index < 1000000000);
 
-    int ver[number_of_deps];
+    vector<int> ver(number_of_deps);
     int end = destination-1;
     ver[0] = end + 1;
     int k = 1;
@@ -165,10 +166,11 @@ vector <path> Map::find_cheapest_path(int origin, int destination, Parameters pa
     for(int i = 0; i < number_of_deps; ++i)
         graph[i] = new double[number_of_deps];
 
-    double d[number_of_deps];
+    vector <double> d(number_of_deps);
     double temp, minimun;
-    int v[number_of_deps], min_index, begin_index=origin-1;
-    Connections con_graph[number_of_deps][number_of_deps];
+    vector <int> v(number_of_deps);
+    int min_index, begin_index = origin - 1;
+    vector <vector<Connections>> con_graph(number_of_deps, vector <Connections>(number_of_deps));
 
     int counter=0;
     for(int i=0; i<number_of_deps; i++){
@@ -236,7 +238,7 @@ vector <path> Map::find_cheapest_path(int origin, int destination, Parameters pa
         }
     } while (min_index < 1000000000);
 
-    int ver[number_of_deps];
+    vector<int> ver(number_of_deps);
     int end = destination-1;
     ver[0] = end + 1;
     int k = 1;
